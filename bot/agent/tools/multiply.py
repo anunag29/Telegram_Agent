@@ -13,6 +13,6 @@ def multiplication_tool(a: int, b: int = 1) -> int:
         result (int) : returns a integer value that is the multiplication of the both the integers
     """
     result = a*b
-    print(f"\n Mulitplication result of {a}x{b} = {result}\n")
+    print(f"\n Using Tool --> Mulitplication result of {a}x{b} = {result}\n")
 
     return f"Mulitplication result of {a}x{b} = {result}", [result]
