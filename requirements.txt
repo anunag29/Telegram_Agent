@@ -1,0 +1,4 @@
+python-telegram-bot==22.0
+python-dotenv==1.1.0
+langgraph==0.3.21
+langchain-groq==0.3.1
