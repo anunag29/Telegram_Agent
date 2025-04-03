@@ -1,0 +1,3 @@
+# Telegram Bot Agent
+
+Chat with agent via Telegram App, upload documents and ask question about it. Reads your emails, summarizes, drafts and sends emails using chat. Send voice messages and much more...
