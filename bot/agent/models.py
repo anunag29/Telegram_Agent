@@ -17,6 +17,5 @@ llm = ChatGroq(
 #     chunk_overlap=100,
 # )
 
-
-# from langchain_huggingface import HuggingFaceEmbeddings
-# embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+from langchain_huggingface import HuggingFaceEmbeddings
+embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")

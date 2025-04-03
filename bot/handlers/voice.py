@@ -1,4 +1,4 @@
-from ..config import Groq_Client
+from .. import Groq_Client
 
 def transcribe_audio(audio_file_path):
     try:
