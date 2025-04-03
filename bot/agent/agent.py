@@ -1,9 +1,8 @@
 import re
 import json
 from uuid import uuid4
-from typing import Literal
 
-from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage, ToolCall
+from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage
 from langgraph.graph import StateGraph, START, END
 
 from .models import llm
@@ -12,7 +11,7 @@ from .tools import *
 
 class Agent:
     def __init__(self):
-        self.system_prompt = '''Your name is Severus, you are a smart AI assistant and answers the user questions intelligently. You can answer the user questions directly using your own knowledge and information from earlier conversation messages or you can also use the tools provided to you to which can perform specific tasks by giving appropriate inputs, fetch data and information to answer the user questions more accurately.
+        self.system_prompt = '''Your name is Severus, you are a smart AI assistant and answers the user questions intelligently. You can answer the user questions directly using your own knowledge and information from the earlier conversation messages or you can also use the tools provided to you. These tools can perform specific tasks by giving appropriate inputs, fetch data and information to answer the user questions more accurately.
                 ## Guidance:
                 1. If you are not able to answer the user question you can ask the user for more information or to elaborate the question.
                 2. After getting response from the tool (only if you executed any tool calls), return the final answer of the user's questions.
@@ -20,6 +19,9 @@ class Agent:
                 '''
 
         self.tools_dict = {"multiplication_tool" : multiplication_tool, "retrieval_tool" : retrieval_tool}
+        for tool in gmail_tools:
+            self.tools_dict[tool.name] = tool
+
         self.llm_with_tools = llm.bind_tools(list(self.tools_dict.values()))
         self.agent = self.build_agent()
 
@@ -47,13 +49,13 @@ class Agent:
             try:
                 print(f"Calling Tool : {tool_call["name"]}")
                 tool = self.tools_dict[tool_call["name"]]
-                tool_output, tool_artifact = tool.invoke(tool_call["args"])
+                tool_output = tool.invoke(tool_call["args"])
 
             except Exception as e:
                 tool_output = "Error occured when calling the tool. Please provide correct input for the tool"
-                tool_artifact = []
+                print(f"Error : {e}")
 
-            tool_response = ToolMessage(content=tool_output, artifact=tool_artifact, tool_call_id=tool_call["id"])
+            tool_response = ToolMessage(content=tool_output, tool_call_id=tool_call["id"])
             return {"messages" : [tool_response]}
 
 

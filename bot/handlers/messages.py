@@ -26,6 +26,7 @@ async def handle_voice_message(update: Update, context: CallbackContext) -> None
     os.remove(file_path)
 
     if transcription:
+        print(transcription)
         response = agent.get_response(transcription, session_id=update.message.from_user.id)
         await update.message.reply_text(response)
     else:

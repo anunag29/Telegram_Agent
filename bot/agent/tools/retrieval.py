@@ -20,4 +20,4 @@ def retrieval_tool(user_query: str) -> int:
     for doc in docs:
         context += doc.page_content
 
-    return f"## User Query : {user_query}\n## Retrieved Context : {context}", [docs]
+    return f"## User Query : {user_query}\n## Retrieved Context : {context}"

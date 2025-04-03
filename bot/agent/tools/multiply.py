@@ -14,4 +14,4 @@ def multiplication_tool(a: int, b: int = 1) -> int:
     """
     result = a*b
 
-    return f"Mulitplication result of {a}x{b} = {result}", [result]
+    return f"Mulitplication result of {a}x{b} = {result}"
